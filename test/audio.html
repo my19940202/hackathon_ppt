@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link rel="dns-prefetch" href="//cpucdn.baidu.com">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="shortcut icon" href="http://cpucdn.baidu.com/static/2016090795319/favicon.ico" type="image/x-icon" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <title>vuejs test</title>
+    </head>
+    <body>
+		<div id="app">
+            <h3>{{ audioSrc }}</h3>
+            <audio :src="audioSrc"  autoplay="autoplay"></audio>
+            <input v-model="newTodo" v-on:keyup.enter="addTodo">
+            <ul>
+                <li v-for="todo in todos">
+                <span>{{ todo.text }}</span>
+                <button v-on:click="removeTodo($index)">say</button>
+                </li>
+            </ul>
+        </div>
+    </body>
+    <script src="http://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                newTodo: '',
+                audioSrc: 'a8sd90f0asd',
+                todos: [{
+                    text: '测试语音'
+                }]
+            },
+            methods: {
+                addTodo: function() {
+                    var text = this.newTodo.trim();
+                    if (text) {
+                        this.todos.push({
+                            text: text
+                        });
+                        this.audioSrc = 'http://tts.baidu.com/text2audio?lan=zh&pid=101&ie=UTF-8&text=' + encodeURIComponent(encodeURIComponent(text));
+                        this.newTodo = '';
+                    }
+                },
+                removeTodo: function(index) {
+                    this.todos.splice(index, 1)
+                }
+            }
+        })
+    </script>
+</html>

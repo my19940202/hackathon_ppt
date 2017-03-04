@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <title>vuejs test</title>
+        <link rel="stylesheet" type="text/css" href="animate.css">
+        <style type="text/css">
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            .container {
+                width: 100%;
+                height: 500px;
+            }
+            .container .cell {
+                width: 30%;
+                height: 100px;
+                margin: 0 1%;
+                border: 1px solid red;
+                float: left;
+                transition: all 2s ease-in-out;
+                background: url(../img/car_thumb_origin.jpg) no-repeat center center;
+            }
+            /*.container .cell:nth-child(1) {
+                background: url(../img/car_thumb_origin.jpg) no-repeat center center;
+                background: red;
+            }*/
+
+
+            .container .cell100 {
+                width: 100%;
+                height: 100px;
+                margin: 1% 0;
+                border: 1px solid red;
+                background: url(../img/car_origin_small.jpg) no-repeat center center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="container" v-on:click="addClass">
+            <div class="cell {{className}}"></div>
+            <div class="cell {{className}}"></div>
+            <div class="cell {{className}}"></div>
+        </div>
+    </body>
+    <script src="http://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
+    <script>
+        var app7 = new Vue({
+            el: '#container',
+            data: {
+                className: ''
+            },
+            computed: {
+                fullName: function () {
+                    return '我是吓死你';
+                }
+            },
+            methods: {
+                addClass: function () {
+                    // this.className = 'bounceIn animated';
+                    this.className = 'cell100';
+                }
+            }
+        });
+    </script>
+</html>

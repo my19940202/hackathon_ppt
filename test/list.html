@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link rel="dns-prefetch" href="//cpucdn.baidu.com">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="shortcut icon" href="http://cpucdn.baidu.com/static/2016090795319/favicon.ico" type="image/x-icon" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <title>        图片频道
+</title>
+    </head>
+    <body>
+	<form action="/upload" method="post" enctype="multipart/form-data">
+    	<input type="file" id="file" accept="images/*"></input>
+	    <span type="submit" id="upload">上传</span>
+	</form>
+    <div class="imglist">
+    
+    </div>
+    </body>
+    <script>
+        var uploadDom = document.querySelector('#upload');
+        var imageListDom = document.querySelector('.imglist');
+
+        uploadDom.onclick = function () {
+            var files = document.getElementById("file").files;
+			var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = function(e) {
+                var pic = document.createElement("img");
+                pic.src = this.result;
+                pic.width = 300;
+                pic.height = 200;
+                imageListDom.appendChild(pic);
+            }
+        };
+    </script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link rel="dns-prefetch" href="//cpucdn.baidu.com">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="shortcut icon" href="http://cpucdn.baidu.com/static/2016090795319/favicon.ico" type="image/x-icon" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <title>vuejs test</title>
+    </head>
+    <body>
+        <div id="app-7">
+            <h1>{{fullName}}</h1>
+            <ol>
+                <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+            </ol>
+        </div>
+    </body>
+    <script src="http://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
+    <script>
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        });
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                groceryList: [
+                    { text: 'Vegetables' },
+                    { text: 'Cheese' },
+                    { text: 'Whatever else humans are supposed to eat' }
+                ],
+                fullName: 'xsb'
+            },
+            computed: {
+                fullName: function () {
+                    return '我是吓死你';
+                }
+            }
+        });
+    </script>
+</html>

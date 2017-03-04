@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="app.css">
+        <link rel="stylesheet" type="text/css" href="test/animate.css">
+        <title>度秘聊天页面</title>
+        <style type="text/css">
+            #container .wrapperList {
+                width: 1300%;
+                height: 100%;
+            }
+            #container .wrapper {
+                width: 7.6923%;
+            }
+            .input_area {
+                display: none;
+            }
+            #container .wrapper .display_img {
+                top: 0%;
+            }
+
+        </style>
+    </head>
+    <body>
+    <div id="container" class="container">
+        <div class="wrapperList" id="wrapperList" :style="posStyle">
+            <div class="wrapper" style="background-image: url(img/ppt/01.jpg);"></div>
+            <div class="wrapper" style="background-image: url(img/ppt/01_new.jpg);"></div>
+            <div class="wrapper" style="background-image: url(img/ppt/02_new.jpg);"></div>
+
+            <div class="wrapper" style="background-image: url(img/ppt/03.jpg);"></div>
+            <div class="wrapper" style="background-image: url(img/ppt/04.jpg);"></div>
+            <div class="wrapper">
+                <div class="long-ppt">
+                    <img src="img/ppt/05.jpg" />
+                </div>
+            </div>
+            <div class="wrapper" style="background-image: url(img/ppt/06.jpg);"></div>
+            <div class="wrapper" style="background-image: url(img/ppt/07.jpg);"></div>
+            <div class="wrapper" id="wrapper">
+                <div class="chat_list">
+                    <audio v-if="audioSrc" :src="audioSrc" style="display: none;" autoplay="autoplay"></audio>
+                    <message-item v-for="item in messageList" v-bind:message="item"></message-item>
+                </div>
+                <div class="input_area">    
+                    <input type="text" placeholder="输入文字,换行即为发送" class="btn btn-default" v-model="inputText" v-on:keyup.enter="addText('')">
+                    <input class="btn btn-default hide" type="file" id="file" accept="images/*" v-on:change="addImg"/>
+                    <label id="upload" class="btn btn-default" for="file">发图片</label>
+                    <input class="btn btn-default" type="button" value="语音" v-on:click="addVoice" />
+                </div>
+                <div class="display_img">
+                    <div class="display_top_bar_item {{topImageHideObj['origin']}} {{transClass}}" v-if="!firstImg" v-on:click="addTransClass">
+                        <div class="{{transScanClass}}"></div>
+                    </div>
+                    <div class="display_top_bar_item {{topImageHideObj['front']}} {{transClass}}" v-if="!firstImg">
+                        <div class="{{transScanClass}}"></div>
+                    </div>
+                    <div class="display_top_bar_item {{topImageHideObj['side']}} {{transClass}}" v-if="!firstImg">
+                        <div class="{{transScanClass}}"></div>
+                    </div>
+                    <div class="display_top_bar_item {{topImageHideObj['back']}} {{transClass}}" v-if="!firstImg">
+                        <div class="{{transScanClass}}"></div>
+                    </div>
+                    
+                    <div class="display_img_list" v-if="!display360 && !firstImg">
+                        <span v-on:click="displayTipsImg('front', this)">前脸</span>
+                        <span v-on:click="displayTipsImg('side', this)">侧面</span>
+                        <span v-on:click="displayTipsImg('back', this)">背面</span>
+                    </div>
+                    <div class="display_img_next" v-if="!display360" v-on:click="hideTipsImg"></div>
+                    <div class="display_img_take" v-on:click="hideFirstImg"></div>
+                    <div class="display_img_done" v-if="display360" v-on:click="onlyhideTips"></div>
+                    <div v-if="display360" class="display_img360">
+                        <imgs-item v-for="item in srcList" v-bind:img="item"></imgs-item>
+                    </div>
+                </div>
+                <div class="chat_menu" v-if="menu">
+                    <menu-item v-for="item in menuList" v-bind:menu="item"></menu-item>
+                </div>
+            </div>
+            <div class="wrapper" style="background-image: url(img/ppt/08.jpg);"></div>
+            <div class="wrapper" style="background-image: url(img/ppt/09.jpg);"></div>
+            <div class="wrapper" style="background-image: url(img/ppt/10.jpg);"></div>
+            <div class="wrapper">
+                <a href="app_real.html" style="display: block;text-align: center;margin-top: 300px;">
+                    <h1>前往识别</h1>
+                </a>
+            </div>
+            <div class="page_btn">
+                <button type="button"  class="btn btn-default btn-lg" v-on:click="prePage">
+                     <span class="glyphicon glyphicon-step-backward "></span>
+                </button>
+                <button type="button"  class="btn btn-default btn-lg" v-on:click="nextPage">
+                     <span class="glyphicon glyphicon-step-forward"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    </body>
+    <script src="src/vue.js"></script>
+    <!-- 手机百度唤起语言输入的js库文件 -->
+    <script src="src/aio.js"></script>
+    <script src="src/bdvoice.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        var size = {
+            height: window.screen.availHeight,
+            width: window.screen.availWidth
+        };
+        var container = document.getElementById('container');
+        container.style.cssText = 'width:' + size.width + 'px;height:' + size.height + 'px';
+    </script>
+    <script src="/demo.js"></script>
+</html>

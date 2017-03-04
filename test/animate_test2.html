@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <title>vuejs test</title>
+        <link rel="stylesheet" type="text/css" href="animate.css">
+        <style type="text/css">
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            .container {
+                width: 100%;
+                height: 500px;
+                position: relative;
+            }
+            .container .cell {
+                position: absolute;
+                top: 0;
+                width: 30%;
+                height: 150px;
+                border: 1px solid red;
+                transition: all 2s ease-in-out;
+                background: url(../img/car_thumb_origin.jpg) no-repeat center center;
+            }
+            .container .cell:nth-child(1) {
+                left: 0;
+            }
+            .container .cell:nth-child(2) {
+                left: 32%;
+            }
+            .container .cell:nth-child(3) {
+                left: 64%;
+            }
+
+
+            .container .cell100 {
+                width: 100%;
+                height: 150px;
+                border: 1px solid red;
+                left: 0!important;
+                background: url(../img/car_origin_small.jpg) no-repeat center center;
+            }
+            .container .cell100:nth-child(1) {
+                top: 0;
+            }
+            .container .cell100:nth-child(2) {
+                top: 150px;
+            }
+            .container .cell100:nth-child(3) {
+                top: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="container" v-on:click="addClass">
+            <div class="cell {{className}}"></div>
+            <div class="cell {{className}}"></div>
+            <div class="cell {{className}}"></div>
+        </div>
+    </body>
+    <script src="http://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
+    <script>
+        var app7 = new Vue({
+            el: '#container',
+            data: {
+                className: ''
+            },
+            computed: {
+                fullName: function () {
+                    return '我是吓死你';
+                }
+            },
+            methods: {
+                addClass: function () {
+                    // this.className = 'bounceIn animated';
+                    this.className = 'cell100';
+                }
+            }
+        });
+    </script>
+</html>

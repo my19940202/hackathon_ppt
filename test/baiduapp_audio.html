@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link rel="dns-prefetch" href="//cpucdn.baidu.com">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="shortcut icon" href="http://cpucdn.baidu.com/static/2016090795319/favicon.ico" type="image/x-icon" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <title>vuejs test</title>
+        <style type="text/css">
+            body > div {
+                width: 200px;
+                height: 100px;
+                margin: 5px;
+                border: 1px solid red;
+            }
+            .text {
+                padding: 5px;
+                color: #DDD;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="test">1111</div>
+        <div>2222</div>
+        <div>3333</div>
+        <div class="text">fgfgfggf</div>
+    </body>
+    <script src="http://static1.searchbox.baidu.com/static/searchbox/openjs/aio.js?v=201502"></script>
+    <script src="src/bdvoice.js"></script>
+    <script type="text/javascript">
+        var textDom = document.querySelector('text');
+        const {search, Recognizer} = window.BdVoice;
+        const recognizer1 = new Recognizer({
+            pluginOptions: {
+                show_voiceUI: '1',
+                voiceSource: 'sound_channel'
+            }
+        }).on('recognizing', function(e) {
+            alert(e.data);
+            textDom.innerHTML = e.data;
+        });
+
+        /*
+        const recognizer2 = new Recognizer({
+            pluginOptions: {
+                show_voiceUI: '0',
+                voiceSource: 'sound_channel'
+            }
+        }).on('recognizing', e => log(e.data));
+        */
+        var testDom = document.querySelector('.test');
+        testDom.onclick = function (e) {
+            recognizer1.start();
+        }
+
+    </script>
+</html>

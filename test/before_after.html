@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link rel="dns-prefetch" href="//cpucdn.baidu.com">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="shortcut icon" href="http://cpucdn.baidu.com/static/2016090795319/favicon.ico" type="image/x-icon" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <title>图片频道</title>
+        <style type="text/css">
+            .container:before {
+                content: 'before';
+            }
+            .container:after {
+                content: 'after';
+            }
+            .shining_bar {
+                width: 400px;
+                height: 40px;
+                background: -webkit-linear-gradient(#ccc, #000);
+                background: -o-linear-gradient(#ccc, #000);
+                background: linear-gradient(#ccc, #000);
+            }
+            .img_wrapper {
+                width: 400px;
+                height: 400px;
+            }
+            @keyframes aniBlink120{
+                from{
+                    margin-left:-60px
+                }
+                to{
+                    margin-left:120px
+                }
+            }
+            @-webkit-keyframes aniBlink120{from{margin-left:-60px}to{margin-left:120px}}
+            .mod_imgLight{position:relative;width:120px;height:160px;overflow:hidden;margin:0 auto}
+            .mod_imgLight a{display:inline-block}
+            .mod_imgLight a:before{
+                content:'';
+                position:absolute;
+                width:60px;
+                height:160px;
+                margin-top:0px;
+                margin-left:-120px;
+                overflow:hidden;
+                z-index:6;
+                /* background:-moz-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,0.4) 50%,rgba(255,255,255,0) 100%); */
+                /* background:-webkit-gradient(linear,left top,right top,color-stop(0%,rgba(255,255,255,0)),color-stop(50%,rgba(255,255,255,0.4)),color-stop(100%,rgba(255,255,255,0))); */
+                background:-webkit-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,0.4) 50%,rgba(255,255,255,0) 100%);
+                /* background:-o-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,0.4) 50%,rgba(255,255,255,0) 100%); */
+                /* -webkit-transform:skewX(-25deg);
+                transform:skewX(-25deg) */
+            }
+            .mod_imgLight a:before{
+                -webkit-animation:aniBlink120 3s ease-out forwards;
+                -moz-animation:aniBlink120 3s ease-out forwards;
+                -o-animation:aniBlink120 3s ease-out forwards;
+                animation:aniBlink120 3s ease-out forwards
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>fuck you</h2>
+            <div class="shining_bar"></div>
+            <div class="img_wrapper">
+                <!-- <img width="400" src="http://ww1.sinaimg.cn/mw600/7e948b4dgw1faa4bj5gzxj20p00z0al6.jpg"> -->
+            </div>
+            <div class="mod_imgLight">
+                <a title="蓝色骨头" href="#">
+                    <img width="400" src="http://ww1.sinaimg.cn/mw600/7e948b4dgw1faa4bj5gzxj20p00z0al6.jpg">
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

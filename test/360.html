@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="format-detection" content="telephone=no">
+        <title>vuejs test</title>
+        <style type="text/css">
+            .hide {
+                display: none;
+            }
+            #app-7 {
+                position: relative;
+            }
+            #app-7 img{
+                position: absolute;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="animate.css">
+    </head>
+    <body>
+        <div id="app-7">
+            <h1>360 汽车全景</h1>
+            <imgs-item v-for="item in srcList" v-bind:img="item"></imgs-item>
+        </div>
+    </body>
+    <script src="http://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
+    <script>
+        var srcList = [];
+        var imgSrcPrefix = 'http://www.buick.com.cn/img/lacrosse_hev/360/black/';
+        Vue.component('imgs-item', {
+            props: ['img'],
+            template: '<img width="500" src="{{img.src}}" class="{{img.class}}" />'
+        });
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                srcList: srcList
+            }
+        });
+
+        for (var i = 1; i < 36; i++) {
+            let indexStr = i;
+            if (indexStr < 10) {
+                indexStr = '0' + indexStr;
+            }
+            setTimeout(function () {
+                srcList.push({
+                    // class: 'slideInDown animated',
+                    class: 'slideInDown animated',
+                    src: imgSrcPrefix + indexStr + '.png'
+                })
+            }, 100 * i)
+        }
+
+        // var index = 0;
+        // var Timer = setInterval(function () {
+        //     if (index === 36) {
+        //         index = 0;
+        //     }
+        //     app7.srcList = app7.srcList.map(function (val) {
+        //         val.class = 'hide';
+        //         return val;
+        //     });
+        //     app7.srcList[index]['class'] = '';
+        //     index++;
+        // }, 150);
+    </script>
+</html>
